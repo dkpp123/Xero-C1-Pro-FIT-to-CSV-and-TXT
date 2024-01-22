@@ -47,11 +47,11 @@ foreach ($fitfile in $fit_temp)
     }
 
 # gets list of newly created .csv from fit_temp directory for processing
-    $items = get-childitem -Path .\fit_temp\*.csv 
+$items = get-childitem -Path .\fit_temp\*.csv 
  
 # Gets shot data and calculates standard deviation
-    foreach ($item in $items)
-        {
+foreach ($item in $items)
+    {
         $csv1 = $item.fullname | import-csv
         $csv_data = $csv1 | where-object 'type' -eq 'data' | where-object 'local number' -eq 4
         $measured = $csv_data.'value 2' | measure-object -average
@@ -123,12 +123,12 @@ foreach ($fitfile in $fit_temp)
             }
 
 # Additional information written to CSV at end of file after shot data processing completes
-    write-output "-,,,,,, `nWeight(gr): , $weight ,,,,,,,,,, `nAverage: , $average ,,,,,,,,,, `nSample Standard Deviation (N-1): , $stddev_fps ,,,,,,,,, `nPopulation Standard Deviation: , $stddevp_fps ,,,,,,,,,, `nExtreme Spread: , $extreme_spread ,,,,,,,,,, `nAverage Kinetic Energy: , $kenergya ,,,,,,,,,, `n-,,,,,, `nSession Name: , $Session_name `nSession Time: , $time" | out-file -filepath .\Results\$Session_name.csx -Append
+        write-output "-,,,,,, `nWeight(gr): , $weight ,,,,,,,,,, `nAverage: , $average ,,,,,,,,,, `nSample Standard Deviation (N-1): , $stddev_fps ,,,,,,,,, `nPopulation Standard Deviation: , $stddevp_fps ,,,,,,,,,, `nExtreme Spread: , $extreme_spread ,,,,,,,,,, `nAverage Kinetic Energy: , $kenergya ,,,,,,,,,, `n-,,,,,, `nSession Name: , $Session_name `nSession Time: , $time" | out-file -filepath .\Results\$Session_name.csx -Append
 
 # turning into a real CSV.  Imports the dummy csv then exports it as properly formatted with file headers so it becomes a real csv
-    $csvprocessing = import-csv .\results\$session_name.csx
-    $csvprocessing | export-csv .\results\$session_name.csv -NoTypeInformation
-    remove-item .\results\$session_name.csx
+        $csvprocessing = import-csv .\results\$session_name.csx
+        $csvprocessing | export-csv .\results\$session_name.csv -NoTypeInformation
+        remove-item .\results\$session_name.csx
     }  
 
 # cleanup actions
