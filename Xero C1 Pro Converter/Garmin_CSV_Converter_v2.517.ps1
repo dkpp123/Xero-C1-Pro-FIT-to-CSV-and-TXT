@@ -115,11 +115,10 @@ foreach ($fitfile in $fit_temp)
                         $adelta = $speed - $average  
                         $ldelta =  $speed - $tdelta
                         $pfactor = ($weight * $speed) / 1000
-
+                        $tdelta = $speed
 # Write TXT file and dummy CSV for later processing into a real CSV
                         Write-Output "`n `nShot #: $shot_num `nSpeed: $speed `nDelta from Average: $adelta `nDelta from Last: $ldelta `nKinetic Energy FPE: $kenergy `nTime of Shot: $time1 `n" | out-file -filepath .\Results\$Session_name.txt -Append
-                        Write-Output "$shot_num,$speed,$adelta,$ldelta,$kenergy,$pfactor,$time1" | out-file -filepath .\Results\$Session_name.csx -Append
-                        $tdelta = $speed
+                        Write-Output "$shot_num,$speed,$adelta,$ldelta,$kenergy,$pfactor,$time1" | out-file -filepath .\Results\$Session_name.csx -Append  
                     } 
             }
 
