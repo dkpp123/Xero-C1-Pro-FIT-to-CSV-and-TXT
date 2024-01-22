@@ -90,7 +90,12 @@ foreach ($fitfile in $fit_temp)
                 $Session_name = Read-Host -Prompt "Session Time/Date: $time `nNum of Shots $shots `nBullet Weight gr: $weight `n `nMin: $min `nMax: $max `nAverage: $average `n `nStandard Deviation: $stddev_fps `nPopulation Standard Deviation: $stddevp_fps `nExtreme Spread: $extreme_spread `nAverage Kinetic Energy: $kenergya `n `n `nEnter Session Name"
                 if (!$Session_name) 
                     {
-                     $session_name = $item.name.Replace('.', '_')
+                        $Session_name = $item.Name.Replace('.', '_')
+                    }
+                    $filecheck = get-childitem -Path .\Results\$session_name.txt 
+                if ($Session_name = $filecheck.name)
+                    {
+                        $Session_name = -join($session_name,"_new")
                     }
 
 # Write TXT file and dummy CSV for later processing into a real CSV              
