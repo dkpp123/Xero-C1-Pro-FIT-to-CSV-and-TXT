@@ -74,11 +74,11 @@ foreach ($item in $items)
                     {
                         $min = ($csv."Value 2" / 304.79999025)
                         $max = ($csv."Value 3" / 304.79999025)
-		                $average = ($csv."Value 4" / 304.79999025)
-		                $shots = $csv."Value 6"
+                        $average = ($csv."Value 4" / 304.79999025)
+                        $shots = $csv."Value 6"
                         $time_hack=([int]$csv."Value 1" + [int]631065600)
                         $time = (([System.DateTimeOffset]::FromUnixTimeSeconds($time_hack)).DateTime.ToLocalTime()).ToString("s")
-		                $extreme_spread= ($max - $min)
+                        $extreme_spread= ($max - $min)
                         $weight = ($csv."Value 5" / 10)
                         $tdelta = $null                
                         $kenergya = (([Math]::Pow($average ,2) * $weight) / 450437)
