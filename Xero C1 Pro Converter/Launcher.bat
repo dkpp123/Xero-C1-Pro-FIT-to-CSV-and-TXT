@@ -1,0 +1,1 @@
+powershell.exe -executionpolicy bypass -file ".\Garmin_CSV_Converter_v2.517.ps1"
